@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Toddler Request Dashboard</title>
   <link rel="preload" as="image" href="assets/images/hungry.png">
   <link rel="preload" as="image" href="assets/images/thirsty.png">
@@ -121,11 +121,17 @@
 
   <script>
     const buttons = document.querySelectorAll('.button');
+    let currentAudio = null;
+
     buttons.forEach(button => {
       button.addEventListener('click', () => {
+        if (currentAudio) {
+          currentAudio.pause();
+          currentAudio.currentTime = 0;
+        }
         const id = button.id;
-        const audio = new Audio(`assets/audio/${id}.mp3`);
-        audio.play();
+        currentAudio = new Audio(`assets/audio/${id}.mp3`);
+        currentAudio.play();
       });
     });
   </script>
